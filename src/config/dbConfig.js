@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
  
 
-mongoose.connect('mongodb://root:example@mongodb:27017/')
+mongoose.connect('mongodb://root:example@172.20.0.3:27017/')
 mongoose.Promise = global.Promise
 
  

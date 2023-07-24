@@ -4,12 +4,25 @@ const User = require('../models/users');
 module.exports = {
   createUser : async (req, res) => {
     try {
-      console.log(req.body)
+      const { name, password, email } = req.body;
+      if (!name || !password || !email) {
+        return res.status(400).json({ message: 'Todos os campos devem ser fornecidos.' });
+      }
+  
+      if (password.length < 6) {
+        return res.status(400).json({ message: 'A senha deve ter pelo menos 6 caracteres.' });
+      }
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: 'O email fornecido é inválido.' });
+      }
+  
       const resultado = await User.create(req.body);
       return res.status(201).json(resultado);
     } catch (err) {
-      console.log("o erro é esse: ",err.message)
-      return res.status(500).json({message: 'Erro no servidor!'})
+      console.log('o erro é esse: ', err.message);
+      return res.status(500).json({ message: 'Erro no servidor!' });
     }
   },
 

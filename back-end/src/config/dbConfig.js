@@ -7,5 +7,4 @@ mongoose.connect('mongodb://root:example@192.168.32.3:27017/').then(() => {
 })
 mongoose.Promise = global.Promise
 
-
 module.exports = mongoose
